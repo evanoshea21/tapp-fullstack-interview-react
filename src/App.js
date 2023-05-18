@@ -1,10 +1,14 @@
 import "./App.css";
 import Editor from "./pages/Editor";
+import {ContextProvider} from './components/ContextAPI.jsx';
+
 
 function App() {
   return (
     <div className="App">
-      <Editor />
+      <ContextProvider>
+        <Editor />
+      </ContextProvider>
     </div>
   );
 }

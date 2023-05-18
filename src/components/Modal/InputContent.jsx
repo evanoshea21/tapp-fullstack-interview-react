@@ -1,23 +1,12 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { Modal } from "@mui/material";
 import { theme } from "../../styles/theme";
+import React from 'react';
+import TextField from '@mui/material/TextField';
+
 
 /** CSS for styled divs */
 
-const ModalView = styled(motion.div)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 8px;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  box-sizing: border-box;
-  display: flex;
-  padding: 48px;
-  padding-bottom: 32px;
-  background-color: #ffffff;
-`;
 
 const Content = styled.form`
   width: 100%;
@@ -34,14 +23,6 @@ const Title = styled.h3`
   font-size: 24px;
   font-weight: 400;
   color: #000;
-`;
-
-const Subtitle = styled.h4`
-  font-size: 14px;
-  max-width: 300px;
-  font-weight: 400;
-  color: ${theme.colors.black[80]};
-  margin-bottom: 16px;
 `;
 
 const SubmitButton = styled(motion.button)`
@@ -74,31 +55,25 @@ const CancelButton = styled(motion.button)`
   transition: background-color 100ms linear, color 150ms linear;
 `;
 
-function ExampleModal(props) {
-  const { isOpen, setIsOpen } = props;
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+function InputContent({sendReq, handleClose, setName}) {
 
   return (
     <>
-      <Modal
-        open={isOpen}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <ModalView
-          initial={{ opacity: 0.25 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <Content onSubmit={handleClose}>
-            <Title>Example Modal</Title>
-            <Subtitle>UI components go here!</Subtitle>
+      <Content>
+            <Title>Find a Domain<br/>for your Business</Title>
+            <TextField
+            sx={{
+              margin: '10px 0',
+              width: '100%'
+            }}
+            id="outlined-basic"
+            label="Your Business Name"
+            variant="outlined"
+            onChange={(e) => setName(e.target.value)}
+            />
             <SubmitButton
               type="submit"
+              onClick={sendReq}
               whileHover={{ scale: 1.025 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -112,10 +87,8 @@ function ExampleModal(props) {
               Cancel
             </CancelButton>
           </Content>
-        </ModalView>
-      </Modal>
     </>
   );
 }
 
-export default ExampleModal;
+export default InputContent;

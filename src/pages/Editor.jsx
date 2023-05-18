@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import Site from "../components/Site";
 import { theme } from "../styles/theme";
+import {Context} from '../components/ContextAPI.jsx';
+import React from 'react'
 
 // Component Styles
 
@@ -31,12 +33,34 @@ const SiteWrapper = styled(motion.div)`
 
 /** Root Editor View */
 function Editor() {
+  const {domain} = React.useContext(Context);
+
+  React.useEffect(() => {
+    console.log('your new domain: ', domain);
+  }, [domain])
+
   return (
-    <Root>
-      <SiteWrapper layout>
-        <Site />
-      </SiteWrapper>
-    </Root>
+      <Root>
+        <SiteWrapper layout>
+          {domain ? (
+            <>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '20px',
+              transform: 'translateY(-20px)'
+            }}>
+              <h1 style={{fontSize: '4rem'}}>Your new Domain!</h1>
+              <p style={{fontSize: '3rem'}}>{domain}</p>
+            </div>
+            </>
+          ) : (
+            <Site/>
+          )}
+        </SiteWrapper>
+      </Root>
   );
 }
 

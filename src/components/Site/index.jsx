@@ -2,7 +2,7 @@ import { useState } from "react";
 import { API_ROUTE } from "../../constants";
 import axios from "axios";
 import styled from "styled-components";
-import ExampleModal from "../ExampleModal";
+import Modal from "../Modal";
 import { theme } from "../../styles/theme";
 import { motion } from "framer-motion";
 
@@ -73,6 +73,7 @@ const ModalButton = styled(Button)`
  */
 async function checkBackendConnection() {
   try {
+    // const resp = await axios.get(API_ROUTE + "/api/v1/summarize");
     const resp = await axios.get(API_ROUTE + "/");
 
     console.log(resp.data);
@@ -90,6 +91,7 @@ function Site(props) {
 
   return (
     <Root>
+
       <SiteTitle>StyleAI Fullstack Interview ⭐️</SiteTitle>
       <SiteDescription>
         Congratulations on making it to the coding interview for the software
@@ -126,7 +128,7 @@ function Site(props) {
       >
         Find Domain!
       </ModalButton>
-      <ExampleModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+      <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
     </Root>
   );
 }
